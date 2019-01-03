@@ -10,7 +10,7 @@
 
 use std::io;
 extern crate url;
-use url::{Url, ParseError};
+use url::{Url};
 use std::collections::HashMap;
 extern crate crypto;
 use crypto::sha2::Sha256;
@@ -27,7 +27,7 @@ fn main() {
 			break;
 		} else {
 			match Url::parse(&input){
-				Err(error) => println!("You entered an invalid URL. Please try again.\n"),
+				Err(_) => println!("You entered an invalid URL. Please try again.\n"),
 				Ok(url) =>  {
 					if url.host_str() == Some("shorturl.io") {
 						// get original url from map
@@ -41,7 +41,9 @@ fn main() {
 						hex.truncate(HASH_LENGTH);
 						hex.insert_str(0, "/");
 						println!("Your shortened URL is: https://shorturl.io{}\n", hex);
-						url_mapping.insert(String::from(hex), String::from(input));
+						if !url_mapping.contains_key(&hex.to_string()) {
+							url_mapping.insert(String::from(hex), String::from(input));
+						}
 					}
 				}
 			}
