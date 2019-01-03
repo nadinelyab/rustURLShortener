@@ -1,0 +1,9 @@
+[package]
+name = "shortURL"
+version = "0.1.0"
+authors = ["Nadin <nadinelyab@gmail.com>"]
+edition = "2018"
+
+[dependencies]
+rust-crypto = "0.2.36"
+url = "1.7.2"
